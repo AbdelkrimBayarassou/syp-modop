@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shape Your Potential Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #495057;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-button:hover {
+            background: #e9ecef;
+            color: #2c3e50;
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #2c3e50;
+            border-bottom-color: #3498db;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border-left: 5px solid #3498db;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h2::before {
+            content: "📊";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .highlight-box {
+            background: linear-gradient(45deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 10px 20px rgba(116, 185, 255, 0.3);
+        }
+
+        .highlight-box h3 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .info-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .info-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .median-explanation {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .median-explanation::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 20%, transparent 50%);
+            transform: rotate(45deg);
+        }
+
+        .median-explanation h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .median-explanation p {
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        .example-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .example-box h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #00b894;
+        }
+
+        .step-number {
+            background: #00b894;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .warning {
+            background: #ffe8e8;
+            border: 1px solid #ffccd5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            color: #721c24;
+        }
+
+        .warning::before {
+            content: "⚠️ ";
+            font-weight: bold;
+        }
+
+        ul {
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            background: #f1f3f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #d73502;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #74b9ff, #0984e3);
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Shape Your Potential Guide</h1>
+            <p>Master your talent development dashboard</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="tab-button active" onclick="showTab('overview')">Overview</button>
+            <button class="tab-button" onclick="showTab('charts')">Charts</button>
+            <button class="tab-button" onclick="showTab('median')">Median</button>
+            <button class="tab-button" onclick="showTab('navigation')">Navigation</button>
+            <button class="tab-button" onclick="showTab('interpretation')">Interpretation</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="section">
+                <h2>Dashboard Introduction</h2>
+                <p>The "Shape Your Potential" dashboard is a leadership competency assessment tool that analyzes several critical dimensions of professional development.</p>
+                
+                <div class="highlight-box">
+                    <h3>🎯 Main Objective</h3>
+                    <p>Assess and develop leadership potential through 4 distinct models and 6 specific criteria, analyzing the performance of 1,236 participants across 26 business units.</p>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>📊 Key Data</h4>
+                        <ul>
+                            <li><strong>1,236</strong> assessed participants</li>
+                            <li><strong>26</strong> business units (BU)</li>
+                            <li><strong>710</strong> men, <strong>526</strong> women, <strong>4</strong> other</li>
+                            <li>Average age: <strong>35.82</strong> years</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h4>🏗️ Dashboard Structure</h4>
+                        <ul>
+                            <li><strong>4 Leadership</strong> models</li>
+                            <li><strong>6 Evaluation</strong> criteria</li>
+                            <li><strong>3 Analysis</strong> dimensions</li>
+                            <li><strong>Global scoring</strong> system</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>The 4 Leadership Models</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>🎭 Impactful</h4>
+                        <p>Ability to generate significant impact and positively influence the work environment.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>🎨 Authentic</h4>
+                        <p>Leadership based on authenticity, transparency, and alignment between values and actions.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>🔄 Independent</h4>
+                        <p>Autonomy in decision-making and ability to lead without constant supervision.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>🌐 Open</h4>
+                        <p>Open-mindedness, adaptability, and ability to integrate different perspectives.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Tab -->
+        <div id="charts" class="tab-content">
+            <div class="section">
+                <h2>Chart Types</h2>
+                
+                <div class="step-indicator">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h4>Grouped Bar Charts</h4>
+                        <p>Each leadership model is represented by a group of colored bars, allowing simultaneous comparison of different criteria.</p>
+                    </div>
+                </div>
+
+                <div class="step-indicator">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h4>Measurement Scale</h4>
+                        <p>The Y-axis ranges from 0 to approximately 350, representing performance scores for each evaluated criterion.</p>
+                    </div>
+                </div>
+
+                <div class="step-indicator">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h4>Color Coding</h4>
+                        <p>Each criterion has its own color, facilitating quick identification of patterns and comparisons.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Reading Values</h2>
+                <div class="example-box">
+                    <h4>💡 Practical Example</h4>
+                    <p>In the "Authentic" model, the highest value is <code>370</code>, while in "Impactful", it reaches <code>275</code>. These differences reveal relative strengths between models.</p>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>🔍 Points of Attention</h4>
+                        <ul>
+                            <li>Identify <strong>peaks</strong> (maximum values)</li>
+                            <li>Spot <strong>valleys</strong> (minimum values)</li>
+                            <li>Observe value <strong>distribution</strong></li>
+                            <li>Compare <strong>averages</strong> between models</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h4>📈 Height Significance</h4>
+                        <ul>
+                            <li><strong>High bars</strong>: Developed competencies</li>
+                            <li><strong>Medium bars</strong>: Potential to explore</li>
+                            <li><strong>Low bars</strong>: Improvement areas</li>
+                            <li><strong>Variations</strong>: Diversified profiles</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Median Tab -->
+        <div id="median" class="tab-content">
+            <div class="median-explanation">
+                <h3>🎯 Understanding the Median</h3>
+                <p>The median is the central value that divides a data set into two equal parts: 50% of values are below the median, and 50% are above.</p>
+            </div>
+
+            <div class="section">
+                <h2>Reading the Median on Charts</h2>
+                
+                <div class="step-indicator">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h4>Visual Location</h4>
+                        <p>The median is represented by the <strong>vertical black line</strong> at the center of each horizontal bar chart.</p>
+                    </div>
+                </div>
+
+                <div class="step-indicator">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h4>Value Interpretation</h4>
+                        <p>In image 2, each leadership model displays its median:</p>
+                        <ul>
+                            <li><strong>Impactful</strong>: median ≈ 163.5</li>
+                            <li><strong>Authentic</strong>: median ≈ 260</li>
+                            <li><strong>Independent</strong>: median ≈ 332</li>
+                            <li><strong>Open</strong>: median ≈ 305</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>📊 Concrete Example - "Independent" Model</h4>
+                    <p>With a median of 332, this means that:</p>
+                    <ul>
+                        <li>50% of participants have a score ≤ 332</li>
+                        <li>50% of participants have a score ≥ 332</li>
+                        <li>It's the balance point of the distribution</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Comparative Median Analysis</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>🥇 Ranking by Median</h4>
+                        <ol>
+                            <li><strong>Independent</strong>: 332 (highest)</li>
+                            <li><strong>Open</strong>: 305</li>
+                            <li><strong>Authentic</strong>: 260</li>
+                            <li><strong>Impactful</strong>: 163.5 (lowest)</li>
+                        </ol>
+                    </div>
+                    <div class="info-card">
+                        <h4>🎯 Practical Implications</h4>
+                        <ul>
+                            <li><strong>Independent</strong>: Organizational strength</li>
+                            <li><strong>Open</strong>: Good adaptability</li>
+                            <li><strong>Authentic</strong>: Moderate potential</li>
+                            <li><strong>Impactful</strong>: Priority development area</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    The median is more robust than the mean because it's not influenced by extreme values. It provides a more balanced view of central performance.
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tab -->
+        <div id="navigation" class="tab-content">
+            <div class="section">
+                <h2>Navigation Interface</h2>
+                
+                <div class="step-indicator">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h4>Main Filters</h4>
+                        <p>At the top of the dashboard, use filters to refine your analysis:</p>
+                        <ul>
+                            <li><strong>Assessment Period</strong>: Evaluation timeframe</li>
+                            <li><strong>Version</strong>: Assessment version</li>
+                            <li><strong>Email/Bu/Name</strong>: Specific criteria filters</li>
+                            <li><strong>Is Test</strong>: Exclude/include test data</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-indicator">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h4>Navigation Tabs</h4>
+                        <p>Four main tabs structure the analysis:</p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>📊 Main Page</h4>
+                        <p>Overview with main KPIs and demographic distribution of participants.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>📈 Main Page v2</h4>
+                        <p>Alternative version of the main view with complementary visualizations.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>🎯 KPI per BU</h4>
+                        <p>Detailed analysis of performance indicators by business unit.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>📋 Usage Statistics</h4>
+                        <p>Usage statistics and system engagement metrics.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Navigating Global Scores</h2>
+                <div class="highlight-box">
+                    <h3>🎨 Horizontal Bar Chart</h3>
+                    <p>The "Global note" chart shows score distribution with a gradient color system from red (low scores) to blue (high scores).</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>🔍 Colored Zone Interpretation</h4>
+                    <ul>
+                        <li><strong>Red Zone (80-110)</strong>: Scores requiring special attention</li>
+                        <li><strong>Yellow-Green Zone (110-140)</strong>: Average scores</li>
+                        <li><strong>Blue Zone (140+)</strong>: Excellent performance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interpretation Tab -->
+        <div id="interpretation" class="tab-content">
+            <div class="section">
+                <h2>Interpretation Methods</h2>
+                
+                <div class="step-indicator">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h4>Pattern Analysis</h4>
+                        <p>Look for recurring trends in the data to identify organizational strengths and weaknesses.</p>
+                    </div>
+                </div>
+
+                <div class="step-indicator">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h4>Relative Comparisons</h4>
+                        <p>Compare performance between models, criteria, and business units to establish internal benchmarks.</p>
+                    </div>
+                </div>
+
+                <div class="step-indicator">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h4>Opportunity Identification</h4>
+                        <p>Use gaps to define targeted development plans and corrective actions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Recommended Actions</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>📈 For High Scores</h4>
+                        <ul>
+                            <li>Capitalize on identified strengths</li>
+                            <li>Share best practices</li>
+                            <li>Develop mentoring programs</li>
+                            <li>Create centers of excellence</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h4>🎯 For Low Scores</h4>
+                        <ul>
+                            <li>Analyze root causes</li>
+                            <li>Develop training plans</li>
+                            <li>Implement coaching support</li>
+                            <li>Define SMART objectives</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3>🚀 Next Steps</h3>
+                    <p>Use these insights to build a talent development strategy aligned with identified needs and organizational objectives.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Reflection Aid Notes</h2>
+                <div class="warning">
+                    Pay attention to the recommendations displayed in the dashboard regarding scores. A score "Between 80 and 109" invites deeper reflection with HR, while a score "Under 80" suggests the employee is probably not ready for a high potential validation process.
+                </div>
+
+                <div class="example-box">
+                    <h4>📝 Using Recommendations</h4>
+                    <p>These thresholds serve as guides for:</p>
+                    <ul>
+                        <li>Prioritizing individual discussions</li>
+                        <li>Adapting development pathways</li>
+                        <li>Optimizing training resource allocation</li>
+                        <li>Structuring development interviews</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Hide all active tab buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            // Show selected content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activate corresponding button
+            event.target.classList.add('active');
+            
+            // Update progress bar
+            updateProgress(tabName);
+        }
+
+        function updateProgress(tabName) {
+            const progressBar = document.getElementById('progressBar');
+            const tabs = ['overview', 'charts', 'median', 'navigation', 'interpretation'];
+            const currentIndex = tabs.indexOf(tabName);
+            const progress = ((currentIndex + 1) / tabs.length) * 100;
+            
+            progressBar.style.width = progress + '%';
+        }
+
+        // Entry animation
+        window.addEventListener('load', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                setTimeout(() => {
+                    section.style.opacity = '0';
+                    section.style.transform = 'translateY(20px)';
+                    section.style.transition = 'all 0.6s ease';
+                    
+                    setTimeout(() => {
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+            
+            // Initialize progress bar
+            updateProgress('overview');
+        });
+
+        // Card hover effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.info-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
